@@ -1,0 +1,246 @@
+#!/bin/ksh
+
+#####################################################################################
+# Autor: David Hudák
+# Předmět: IOS
+# Projekt: Projekt č. 1
+# Účel: Prohledávání adresáře a tvorba histogramu velikostí souborů
+# Místo: FIT VUTBR
+# Testováno: Eva, Merlin, Linux Mint (na mém PC, verze 19.3, Cinnamon)
+##################################################################################### 
+
+prepi=0 
+prepn=0
+# Přepínače i a n
+
+
+# Cyklus na zpracování přepínačů - převzato a upraveno z přednášky prof. T. Vojnara
+while getopts i:n o 
+do  case "$o" in
+    i)  prepi=1
+    	regexp=$OPTARG;;
+    n)  prepn=1;;
+    *)  echo "Option 'i' with parameter or option 'n', or directory." >&2
+        exit 1;;
+    esac
+done
+
+((OPTIND--))
+shift $OPTIND
+
+if [ -z "$*" ]; then
+	locPath=`pwd` # Cesta nezadána implicitně, spustit v lokálním adresáři.
+else
+	if [ ! -d "$*" ]; then
+		echo "Directory does not exist." >&2
+		exit 2
+	else
+		locPath=$* # $* zahrnuje pouze argumenty, které zbyly po provedení getopts.
+	fi
+fi
+
+if [ "locPath" == "regexp" ]; then  # Regulární výraz zahrnuje i startovní adresář - není důvod pokračovat.
+	echo "You ignore whole directory." >&2
+	exit 3
+fi
+
+echo Root directory: $locPath # Tisk by se mohl provést později, ale v případě, že uživatel zadá velkou složku (obsahem),
+# je tohle řešení podle mě lepší.
+
+ND=0 # Nastavení počtu složek
+NF=0 # Nastavení počtu souborů
+
+#BiB=0 #KiB=0 #tKiB=0 #hKiB=0 #MiB=0 #tMiB=0 #hMiB=0 #GiB=0 #mGiB=0
+#Počáteční obsah pole (t - ten - deset; h - hundred - sto)
+
+for i in {0..8}
+do
+    pole[i]=0
+done
+
+cur=0
+
+HistoSoubory(){
+	for i in `ls $1`
+	do
+		pomvar=$i
+		i=`echo "$1/$i"` # Připojení současného adresáře k názvu souboru.
+		if test -d "$i"; then # Test, jestli je daný "soubor" adresář.
+				continue
+		fi
+		if [ $prepi -eq 1 ] # V případě, že je přepínač spuštěn, dochází k porovnání s regulárním výrazem.
+		then
+			if [[ "$pomvar" =~ $regexp ]]; then
+				continue
+			fi
+		fi
+		cur=`wc -c < $i`
+		if [ $cur -le 100 ]; then # Vyčerpávající výčet možných případů.
+			let pole[0]++ # Přičtení k počtu souborů <100B, ostatní analogicky pokračují
+			
+		elif [ $cur -le 1024 ]; then
+			let pole[1]++
+			
+		elif [ $cur -le 10240 ]; then
+			let pole[2]++
+			
+		elif [ $cur -le 102400 ]; then
+			let pole[3]++
+			
+		elif [ $cur -le 1048576 ]; then
+			let pole[4]++
+			
+		elif [ $cur -le 10485760 ]; then
+			let pole[5]++
+			
+		elif [ $cur -le 104857600 ]; then
+			let pole[6]++
+			
+		elif [ $cur -le 1073741824 ]; then
+			let pole[7]++
+			
+		else
+            let pole[8]++
+		fi
+		NF=$((NF+1))
+	done
+}
+
+
+# Funkce na rekurzivní průchod složek
+# Komentář k efektivitě - funkce s přepínačem i bez je v jedné a dochází zde vždy k neefektivnímu volání ifu. Je to z důvodu neexistence
+# duplicitních funkcí (přehlednost kódu) a z důvodu, že v případě použití ls --ignore=$regexp by se dělo to samé.
+
+PruchodSlozek(){
+	for j in `find $1 -type d`
+	do
+		if [ $prepi -eq 1 ] # V případě, že byl spuštěn přepínač na regulární výraz, dochází k ignorování složek obsahující daný regulární výraz.
+		then
+			pomvar=`echo $j | rev | cut -d '/' -f-1 | rev`
+			if [[ "$pomvar" =~ $regexp ]]; then
+				continue
+			fi
+		fi
+		ND=$((ND+1))
+		HistoSoubory $j
+	done
+}
+
+pIFS=$IFS # Zapamatování původního oddělovače.
+IFS=$'
+' # Změna oddelovače na enter (z důvodu nekompatibility s některými stroji nepoužito \n)
+PruchodSlozek $locPath # Volání funkce pro zjištění počtu složek.
+
+IFS=$pIFS # Návrat oddělovače do původniho stavu
+
+
+
+
+maxSize=0
+
+if test -t 1; then
+    maxSize=`tput cols` # Počet znaků na řádek
+else
+    maxSize=79 # Standardní velikost řádku mimo terminál
+fi
+
+let maxSize-=13 # 11 znaků pro standardní výpis, 1 znak rezerva a 1 znak mezera mezi : a "##..."
+
+
+# Tisk histogramu
+
+
+echo Directories: $ND
+echo All files: $NF
+echo File size histogram:
+
+
+# Funkce NormHist normuje histogram (spuštěný přepínač -n)
+
+NormHist(){
+	let preteklo=0
+	while [ "$preteklo" -eq 0 ]; do
+	    preteklo=1
+	    for i in {0..8}
+	    do
+	        if test ${pole[i]} -gt $maxSize; then # Pokud je na řádku více \#, než je možno, dělí se všechny položky dvojkou
+	            preteklo=0
+	            for j in {0..8}
+	            do
+	                let pole[j]=${pole[j]}/2
+	            done
+	            break
+	        fi
+	    done
+	done
+}
+
+
+# Funkce vypisHashtagy podle čísla na dané pozici v poli pole[]
+# Předpokládá se vstup pro řádek pole
+
+vypisHashtagy(){ 
+
+    if test ${pole[$1]} -eq 0; then
+        return
+    fi
+    i=${pole[$1]}
+    while [ $i -gt 0 ]
+    do
+    	echo -n \#
+    	let i--
+    done
+    #for i in {1..${pole[$1]}}
+    #do
+    #    echo -n \#
+    #done
+    
+}
+
+
+# Pokud uživatel zadal -n, dojde k znormování výstupu
+
+if test 1 -eq $prepn; then
+	NormHist
+fi
+
+
+# Pracný výpis jednotlivých prvků histogramu
+
+echo -n "  <100 B  :"
+vypisHashtagy 0
+echo
+
+echo -n "  <1 KiB  :"
+vypisHashtagy 1
+echo
+
+echo -n "  <10 KiB :"
+vypisHashtagy 2
+echo
+
+echo -n "  <100 KiB:"
+vypisHashtagy 3
+echo
+
+echo -n "  <1 MiB  :"
+vypisHashtagy 4
+echo
+
+echo -n "  <10 MiB :"
+vypisHashtagy 5
+echo
+
+echo -n "  <100 MiB:"
+vypisHashtagy 6
+echo
+
+echo -n "  <1 GiB  :"
+vypisHashtagy 7
+echo
+
+echo -n "  >=1 GiB :"
+vypisHashtagy 8
+echo
+
+exit 0
