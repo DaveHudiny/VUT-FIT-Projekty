@@ -1,0 +1,25 @@
+File = README
+Subject = IPK
+This is readme file for David Hudák's project to subject IPK (Computer Communications and Networks) and describes basic facts about my project.
+
+Files included:
+    makefile - calling make in shell in folder with project builds project (and file "ipk-sniffer", which will be executable solution for this project)
+    main.cpp
+    main.h
+    README (this file)
+    manual.pdf
+
+How to run project:
+    $ make
+    $ ./ipk-sniffer [args]
+
+Arguments (args) for project:
+    --interface=device/-i device - if no device chosen or this argument is not used, all devices will be printed
+        -- program will sniff packets from "device"
+    -n number - Sniffer will sniff [number] packets. If no argument -n, sniffer will sniff only one packet.
+    --arp --icmp --tcp/-t --udp/-u - arguments for filtering sniffer (only ARP packets will be sniffed etc.)
+    -p port - number of filtered port. Cannot be combined with --arp and --icmp without -t or -u.
+
+No notable extensions yet.
+
+Have a nice day with using my program.
