@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Chleba.Views.Page1">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label FontSize="60" BackgroundColor="Red"
+                   Text="This action is irreversible!" 
+                   HorizontalTextAlignment="Center"/>
+            <Label Text="Delete all data?" FontSize="30"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Clicked="Yes_Button" Text="Yes" FontSize="30" BackgroundColor="Red" Grid.Row="1"/>
+                <Button Clicked="No_Button" Text="No" FontSize="30" Grid.Row="1" Grid.Column="1"/>
+                <Button Clicked="Delete_Everything" Text="Yes and include templates" BackgroundColor="Black" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+                <Button Clicked="Delete_Templates_Only" Text="Delete only templates" BackgroundColor="DarkGray" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

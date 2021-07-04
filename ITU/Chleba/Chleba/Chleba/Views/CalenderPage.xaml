@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Chleba.Views.CalenderPage"
+             xmlns:controls="clr-namespace:XamForms.Controls;assembly=XamForms.Controls.Calendar" xmlns:ViewModels="clr-namespace:Chleba.ViewModels"
+             Title="Calendar">
+    <ContentPage.BindingContext>
+        <ViewModels:DataFlowViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.3*"/>
+            </Grid.RowDefinitions>
+            <controls:Calendar
+                   DateClicked="DateChanged"
+                    LeftArrowCommand="{Binding MonthChangedLeftCommand}"
+                    RightArrowCommand="{Binding MonthChangedRightCommand}"
+                   LeftArrowClicked="MonthChangedLeft"
+                   RightArrowClicked="MonthChangedRight"
+                   x:Name="dater"
+                   Padding="10,0,10,0"   
+                   SelectedBorderWidth="4"   
+                   DisabledBorderColor="Black"  
+                   ShowNumberOfWeek="false"  
+                   StartDay="Monday"  
+                   TitleLabelTextColor="Purple"  
+                   TitleLeftArrowTextColor="Blue"  
+                   SelectedDate="{Binding Date}"  
+                   SpecialDates="{Binding Attendances}"  
+                   DateCommand="{Binding DateChosen}"
+                   Grid.Row="0"/>
+            <ListView x:Name="MainListView"  
+             HasUnevenRows="True"  
+             ItemTapped="MainListView_ItemTapped" Grid.Row="1"
+             ItemsSource="{Binding list}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical">
+                                <Label BackgroundColor="{Binding backgroundColor}" Text="{Binding EventName}"/>
+                                <Label Text="{Binding Date}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="Eventor" Clicked="Button_Add" Text="Add Event" Grid.Row="2" IsVisible="true"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

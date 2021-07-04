@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Chleba.Views.WindowsPhoneSettingsPage"
+             Title="Change custom buttons">
+    <ContentPage.Content>
+        <Grid BackgroundColor="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.03*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.03*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Clicked="Button1_clicked"  Text="Template 1" Grid.Row="1" BackgroundColor="DeepSkyBlue" Grid.Column="0"></Button>
+            <Button Text="Template 2"  Clicked="Button2_clicked" Grid.Row="2" BackgroundColor="DeepSkyBlue" Grid.Column="0"></Button>
+            <Button Text="Template 3"  Clicked="Button3_clicked" Grid.Row="3" BackgroundColor="DeepSkyBlue" Grid.Column="0"></Button>
+            <Button Text="Template 4"  Clicked="Button4_clicked" Grid.Row="1" BackgroundColor="DeepSkyBlue" Grid.Column="1"></Button>
+            <Button Text="Template 5"  Clicked="Button5_clicked" Grid.Row="2" BackgroundColor="DeepSkyBlue" Grid.Column="1"></Button>
+            <Button Text="Template 6"  Clicked="Button6_clicked" Grid.Row="3" BackgroundColor="DeepSkyBlue"  Grid.Column="1"></Button>
+            <Button Text="Template 7"  Clicked="Button7_clicked" Grid.Row="1" BackgroundColor="DeepSkyBlue" Grid.Column="2"></Button>
+            <Button Text="Template 8"  Clicked="Button8_clicked" Grid.Row="2" BackgroundColor="DeepSkyBlue" Grid.Column="2"></Button>
+            <Button Text="Template 9"  Clicked="Button9_clicked" Grid.Row="3" BackgroundColor="DeepSkyBlue" Grid.Column="2"></Button>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

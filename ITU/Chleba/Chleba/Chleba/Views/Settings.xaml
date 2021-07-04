@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:ViewModels="clr-namespace:Chleba.ViewModels"
+             x:Class="Chleba.Views.Settings"
+             Title="Settings">
+
+        <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button FontSize="20" Text="Change events types" Grid.ColumnSpan="2" Clicked="EventSettings"/>
+            <Button FontSize="20" Grid.Row="1" Grid.ColumnSpan="2" Clicked="Delete_data" Text="Delete all data"/>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

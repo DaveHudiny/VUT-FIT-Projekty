@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ViewModels="clr-namespace:Chleba.ViewModels"
+             x:Class="Chleba.Views.AddEvent"
+             Title="Detail of event">
+    <ContentPage.BindingContext>
+        <ViewModels:DataFlowViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.3*" />
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="1.3*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.03*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Entry x:Name="ID_label" IsVisible="false" Keyboard="Numeric" Text="{Binding ID}"/>
+            <Entry x:Name="EventNameInput" Placeholder="Event name" Text="{Binding name}" VerticalTextAlignment="End" Grid.ColumnSpan="3"/>
+            <DatePicker x:Name="DatePicker" Date="{Binding dateDay}"  Grid.Row="1"/>
+            <TimePicker x:Name="TimePicker" Time="{Binding timeDay}" Grid.Row="1" Grid.Column="1"/>
+            <Picker x:Name="EventPicker" SelectedItem="{Binding type}" Title="Type of event" Grid.Row="2" Grid.ColumnSpan="2">
+                <Picker.Items>
+                    <x:String>Payment</x:String>
+                    <x:String>Shop</x:String>
+                    <x:String>Job</x:String>
+                    <x:String>School homework</x:String>
+                    <x:String>Test</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Picker x:Name="PriorityPicker" SelectedIndex="{Binding priority}" Title="Priority" Grid.Row="2" Grid.Column="2">
+                <Picker.Items>
+                    <x:String>0</x:String>
+                    <x:String>1</x:String>
+                    <x:String>2</x:String>
+                    <x:String>3</x:String>
+                    <x:String>4</x:String>
+                    <x:String>5</x:String>
+                </Picker.Items>
+            </Picker>
+            <Label Text="Payment" FontSize="20" Grid.Row="3" VerticalOptions="Center"></Label>
+            <Switch x:Name="Switcherer"  IsToggled="{Binding isToggled}" Grid.Row="3" Grid.Column="1" Toggled="Switch_Toggled"/>
+            <Entry Keyboard="Numeric" Text="{Binding payment}" x:Name="EntryAmount" Placeholder="Amount" IsVisible="false" Grid.Row="4" Grid.Column="0" />
+            <Picker x:Name="CurrencyPicker" SelectedItem="{Binding currency}" Title="Currency" Grid.Row="4" Grid.Column="1" IsVisible="false">
+                <Picker.Items>
+                    <x:String>CZK</x:String>
+                    <x:String>USD</x:String>
+                    <x:String>EUR</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Entry x:Name="EventDescription" Text="{Binding description}" Placeholder="Description" Grid.Row="5" Grid.ColumnSpan="3"/>
+            <Button x:Name="Finish" Command="{Binding addEventCommand}" Text="Add event" Grid.Row="6" Grid.ColumnSpan="3" Clicked="ButtonFinishAdd"></Button>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
