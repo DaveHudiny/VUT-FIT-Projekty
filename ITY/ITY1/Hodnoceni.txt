@@ -1,0 +1,2 @@
+-1:chybí nezlomitelné mezery (tildy, vlnky); doporučuji používat vlnu --> 92:kódovaní znaků s diakritikou, aby bylo možn
+-0:zvýraznění neděláno pomocí \emph

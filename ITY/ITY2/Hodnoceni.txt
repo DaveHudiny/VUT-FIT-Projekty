@@ -1,0 +1,2 @@
+-1:podteceni sazby underfull
+-0.2:diferencial

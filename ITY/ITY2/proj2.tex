@@ -1,0 +1,171 @@
+\documentclass[11pt, a4paper, twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage[left=1.5cm,top=2.5cm, text={18cm, 25cm}]{geometry}
+\usepackage[czech]{babel}
+\title{ITY2}
+\author{xhudak03}
+\date{March 2021}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{times}
+
+\theoremstyle{definition}
+\newtheorem{d1}{Definice}
+\newtheorem{v1}{Věta}
+
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+{\Huge
+\textsc{Fakulta informačních technologií\\[0.4em]Vysoké učení technické v~Brně}}\\
+\vspace{\stretch{0.382}}
+\LARGE
+Typografie a publikování -- 2. projekt\\[0.3em]Sazba dokumentů a matematických výrazů
+\vspace{\stretch{0.618}}
+\end{center}
+{\LARGE 2021 \hfill
+David Hudák (xhudak03)}
+\thispagestyle{empty}
+\end{titlepage}
+
+\clearpage
+\pagenumbering{arabic} 
+
+\section*{Úvod}
+
+V~této úloze si vyzkoušíme sazbu titulní strany, matematických vzorců, prostředí a dalších textových struktur obvyklých pro technicky zaměřené texty (například rovnice~\eqref{rovnice1}
+nebo Definice \ref{def1} na straně \pageref{rovnice}). Rovněž si vyzkoušíme používání odkazů {\fontfamily{pcr}\selectfont \symbol{92}ref} a
+{\fontfamily{pcr}\selectfont \symbol{92}pageref}.
+
+Na titulní straně je využito sázení nadpisu podle optického středu s~využitím zlatého řezu. Tento postup byl
+probírán na přednášce. Dále je použito odřádkování se
+zadanou relativní velikostí 0.4 em a 0.3 em.
+
+V~případě, že budete potřebovat vyjádřit matematickou
+konstrukci nebo symbol a nebude se Vám dařit jej nalézt
+v~samotném \LaTeX u, doporučuji prostudovat možnosti balíku maker \AmS -\LaTeX.
+
+\section{Matematický text}
+
+Nejprve se podíváme na sázení matematických symbolů
+a~výrazů v~plynulém textu včetně sazby definic a vět s~využitím 
+balíku {\fontfamily{pcr}\selectfont amsthm}. Rovněž použijeme poznámku pod
+čarou s~použitím příkazu {\fontfamily{pcr}\selectfont
+\symbol{92}footnote}. Někdy je vhodné
+použít konstrukci {\fontfamily{pcr}\selectfont
+\symbol{92}mbox\symbol{123}\symbol{125}}, která říká, že text nemá být
+zalomen.
+\begin{d1}
+\label{def1}
+Rozšířený zásobníkový automat \textit{(RZA) je de\-finován jako sedmice tvaru $A = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)$,
+kde:}
+\begin{itemize}
+    \item $Q$\textit{ je konečná množina} vnitřních (řídicích) stavů,
+    \item $\Sigma$ \textit{je konečná} vstupní abeceda,
+    \item $\Gamma$ \textit{je konečná} zásobníková abeceda,
+    \item $\delta$ \textit{je} přechodová funkce $Q \times (\Sigma \cup \{\epsilon\})\times\Gamma^\ast\rightarrow 2^{Q\times\Gamma^*}$,
+    \item $q_0 \in Q$ \textit{je} počáteční stav, $Z_0 \in \Gamma$ \textit{je} startovací symbol zásobníku \emph{a} $F \subseteq Q$ \textit{je množina} koncových stavů.
+\end{itemize}
+
+Nechť $P=(Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)$ je rozšířený zásobníkový automat. \textit{Konfigurací} nazveme trojici $(q, w, \alpha) \in Q \times \Sigma^* \times \Gamma^*$, kde $q$ je aktuální stav vnitřního řízení, $w$ je dosud nezpracovaná část vstupního řetězce a $\alpha =
+Z_{i_1}Z_{i_2}
+\dots Z_{i_k}$
+je obsah zásobníku\footnote{$Z_{i1}$ je vrchol zásobníku}.
+\subsection{Podsekce obsahující větu a odkaz}
+\end{d1}
+
+\begin{d1}
+\label{def2}
+Řetězec $w$ nad abecedou $\Sigma$ je přijat RZA
+$A$ \textit{jestliže $(q_0, w, Z_0)\overset{*}{\underset{A}{\vdash}}(q_F, \epsilon, \gamma)$ pro nějaké $\gamma\in \Gamma^*$ a $q_F \in F$. Množinu $L(A) = \{w$ $|$ $w$ je přijat RZA $A\} \subseteq \Sigma^*$~nazýváme} jazyk přijímaný RZA $A$.
+\end{d1}
+
+Nyní si vyzkoušíme sazbu vět a důkazů opět s~použitím
+balíku {\fontfamily{pcr}\selectfont amsthm}.
+\begin{v1}
+\textit{Třída jazyků, které jsou přijímány ZA, odpovídá}
+bezkontextovým jazykům.
+\end{v1}
+\begin{proof}
+V~důkaze vyjdeme z~Definice \ref{def1} a \ref{def2}.
+\end{proof}
+
+\section{Rovnice a odkazy}
+\label{rovnice}
+
+Složitější matematické formulace sázíme mimo plynulý
+text. Lze umístit několik výrazů na jeden řádek, ale pak je
+třeba tyto vhodně oddělit, například příkazem {\fontfamily{pcr}\selectfont \symbol{92}quad}.
+\\
+$$\sqrt[i]{x_i^3}\quad \text{kde } x_i \text{ je i-té sudé číslo splňující}\quad x_i^{x_i^{i^2}+2} \leq y_i^{x_i^4}$$
+
+V~rovnici \eqref{rovnice1} jsou využity tři typy závorek s~různou
+explicitně definovanou velikostí.
+
+\begin{eqnarray}
+\label{rovnice1}
+    x &=& \bigg[\Big\{\big[a+b\big]*c\Big\}^d\oplus 2\bigg]^{3/2}\\
+    y&=&\lim_{x \rightarrow \infty}\frac{\frac{1}{\log_{10} x}}{\sin^2 x + \cos^2 x} \nonumber
+\end{eqnarray}
+
+V~této větě vidíme, jak vypadá implicitní vysázení limity $\lim_{n\rightarrow \infty}f(n)$ v~normálním odstavci textu. 
+Podobně je to i s~dalšími symboly jako $\prod^n_{i=1}2^i$ či $\bigcap_{A\in \mathcal{B}}A$.
+V~případě vzorců $\lim\limits_{n\rightarrow \infty}f(n)$ a
+$\prod\limits^n_{i=1}2^i$ jsme si vynutili méně
+úspornou sazbu příkazem {\fontfamily{pcr}\selectfont \symbol{92}limits}.
+
+
+\begin{equation}
+\label{rovnice2}
+    \int_b^a g(x)dx\quad =\quad -\int\limits_{a}\limits^{b} f(x)dx
+\end{equation}
+
+
+\section{Matice}
+Pro sázení matic se velmi často používá prostředí {\fontfamily{pcr}\selectfont array}
+a závorky ({\fontfamily{pcr}\selectfont \symbol{92}left}, {\fontfamily{pcr}\selectfont \symbol{92}right}).
+
+$$
+\left(\begin{array}{ccc}
+a-b & \widehat{\xi+\omega} & \pi \\
+\vec{\mathbf{a}} & \overleftrightarrow{A C} & \hat{\beta}
+\end{array}
+\right)
+= 1 \Longleftrightarrow \mathcal{Q}=\mathbb{R}
+$$
+
+$$
+A =
+\left\|
+\begin{array}{cccc}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \ldots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{array}
+\right\|
+=
+\left| 
+\begin{array}{cc}
+t & u \\
+v & w
+\end{array} \right|
+= tw - uw
+$$
+
+Prostředí {\fontfamily{pcr}\selectfont array} lze úspěšně využít i jinde.
+
+$$ \binom{n}{k} = \left\{
+\begin{array}{c l}
+0 & \text{pro } k < 0 \text{ nebo } k > n \\
+\frac{n!}{k!(n-k)!} & \text{pro } 0 \leq k \leq n
+\end{array} \right. $$
+
+
+
+
+
+
+
+\end{document}

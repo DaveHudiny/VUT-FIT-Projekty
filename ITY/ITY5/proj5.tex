@@ -1,0 +1,167 @@
+\documentclass[14pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[czech]{babel}
+\usetheme{Berlin}
+\usecolortheme{dolphin}
+\bibliographystyle{czplain}
+\renewcommand{\UrlFont}{\ttfamily\small}
+\usepackage{url}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+
+\title{Hashovací tabulka}
+\author{David Hudák}
+\date{xhudak03}
+\begin{document}
+
+\maketitle
+\section{Hashovací tabulky}
+\subsection{Motivace}
+\begin{frame}{Motivace 1/2 -- úvod}
+    \begin{itemize}
+        \item U některých problémů:
+        \begin{itemize}
+            \item Odhadovaná velikost přiměřená
+            \item Preferována rychlost
+            \item Častý přístup k položkám
+        \end{itemize}
+        \item Příznivá časová složitost
+        \item Dnes běžné implementace ve standardních knihovnách
+    \end{itemize}
+\end{frame}
+\begin{frame}{Motivace 2/2 -- reálné využití}
+    \begin{itemize}
+        \item Slovníky\cite{stack}
+        \begin{itemize}
+            \item Ukládání proměnných v překladači
+            \item Klasické využití slovníku
+        \end{itemize}
+        \pause
+        \item Databáze
+        \begin{itemize}
+            \item Rychlé vyhledání informace na základě klíče
+        \end{itemize}
+        \pause
+        \item Přesah do kryptografie
+    \end{itemize}
+\end{frame}
+\subsection{Základní princip}
+
+\begin{frame}{Teoretický základ}
+    \begin{itemize}
+        \item Hashovací funkce
+        \begin{itemize}
+            \item Schopna vypočítat index ze vstupního klíče
+            \item Ideálně vytvářející minimum kolizí -- problém:
+            \begin{itemize}
+                \item Pro $n$ prvků pro mapování a $m$ políček v tabulce $m^n$ možných funkcí
+            \end{itemize}
+        \end{itemize}
+        \item Hashovací tabulka -- pole struktur
+        \begin{itemize}
+            \item Klíč
+            \item Obsazenost
+            \item Data
+            \item Ukazatel na další prvek (nepovinné)
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+\section{Kolize}
+\subsection{Kolize}
+\begin{frame}{Řešení kolizí}
+    \begin{itemize}
+        \item Kolize -- dva různé prvky se stejným indexem (synonyma)
+        \item Implicitní řešení kolizí
+        \begin{itemize}
+            \item Kolizní prvek získává adresu z opakovaného výpočtu hashovací funkce
+        \end{itemize}
+        \item Explicitní řešení kolizí
+        \begin{itemize}
+            \item Každý element tabulky lineárním seznamem
+        \end{itemize}
+        \item Od zvolené možnosti se odvíjí implementace vyhledávání, vkládání i mazání (u implicitního zřetězení mazání komplikované)
+    \end{itemize}
+\end{frame}
+
+\subsection{Ukázka}
+\begin{frame}{Ukázka 1/3}
+\begin{itemize}
+    \item Funkce sčítá hodnoty všech znaků (pouze ukázková)
+    \begin{equation*}
+        index = \sum_{i=0}^{n}key[i] \text{ mod } m
+    \end{equation*}
+    \begin{itemize}
+        \item $key[i]$ -- hodnota řetězce na indexu $i$
+        \item $index$ -- index, kam se má přistupovat v~tabulce
+        \item $n$ -- počet všech prvků klíče
+        \item $m$ -- počet prvků tabulky
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Ukázka 2/3}
+\begin{itemize}
+    \item Velikost tabulky 100
+    \item Vkládáme slovo blecha
+    \begin{itemize}
+        \item $index = 7$
+    \end{itemize}
+    \item Vkládáme slovo chleba
+    \begin{itemize}
+        \item $index = 7$
+        \item \textbf{Kolize!}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Ukázka 3/3}
+    \begin{figure}
+        \centering
+        \includesvg[inkscapelatex=false, scale=0.6, keepaspectratio]{ukazka.svg}
+        \label{fig:my_label}
+    \end{figure}
+\end{frame}
+\section{Pseudokód}
+\subsection{Vyhledávání v tabulce}
+\begin{frame}{Vyhledávání při explicitním zřetězení}
+    \begin{algorithm}[H]
+        \begin{algorithmic}[1]
+            \STATE $index = hash(key)$
+            \IF {$key == table[index].key$} 
+                \RETURN $True$
+            \ELSE
+                \RETURN $inList(table[index].list, key)$
+            \ENDIF
+        \end{algorithmic}
+        \label{alg:seq}
+    \end{algorithm}
+\end{frame}
+\section{Složitost}
+\subsection{Složitost}
+\begin{frame}{Složitost}
+    \begin{itemize}
+        \item Vkládání, vyhledávání, mazání
+        \begin{itemize}
+            \item $O(1)$ -- nejpříznivější; pouze čas výpočtu hashovací funkce
+            \item $O(n)$ -- nejhorší; hashovací tabulka transformována do lineárního seznamu (moc kolizí)
+        \end{itemize}
+        \item Důležitá kvalita hashovací funkce
+        \item Velký vliv velikosti hashovací tabulky
+    \end{itemize}
+\end{frame}
+\section{Reference}
+\subsection{Reference}
+\begin{frame}{Reference}
+\fontsize{9pt}{10}\selectfont
+\bibliography{bib}    
+\end{frame}
+
+
+\end{document}

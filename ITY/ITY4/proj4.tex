@@ -1,0 +1,72 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage[left=2cm,top=3cm, text={17cm, 24cm}]{geometry}
+\usepackage[vietnamese=nohyphenation]{hyphsubst}
+\usepackage[czech, vietnamese.licr]{babel}
+\title{ITY2}
+\author{xhudak03}
+\date{March 2021}
+\usepackage{times}
+\usepackage{multirow}
+\usepackage[unicode]{hyperref}
+\bibliographystyle{czechiso}
+
+
+\begin{document}
+\selectlanguage{czech}
+\begin{titlepage}
+\begin{center}
+{\Huge
+\textsc{Vysoké učení technické v~Brně\huge{\\[0.4em]Fakulta informačních technologií}}}\\
+\vspace{\stretch{0.382}}
+\LARGE
+Typografie a publikování -- 4. projekt\\[0.3em]\huge Stručná historie \LaTeX u
+\vspace{\stretch{0.618}}
+\end{center}
+{\LARGE \today \hfill
+David Hudák}
+\thispagestyle{empty}
+\end{titlepage}
+
+\clearpage
+\pagenumbering{arabic} 
+\newpage
+
+
+\section{Název}
+\begin{sloppypar}
+Při prvním setkání s~prostředím \LaTeX~jsem se já a mí gymnaziální spolužáci
+pousmáli nad variantami jeho výslovnosti. Někde se můžeme setkat
+s~výslovností \verb|[leitek]| (například v~předmětu IEL), 
+avšak převažujícím způsobem výslovnosti (včetně předmětu ITY) je
+\verb|[latech]|. Můj středoškolský učitel to zdůvodňuje na svých stránkách\cite{martinek1} způsobem, že se jedná o~zkratku \uv{\textbf{La}mportův \textbf{TeX}}, kde Lamport se vyslovuje tak, jak se píše, a~\textbf{X} ve slově \textbf{TeX} je řeckým písmenem chí ($X$).
+\end{sloppypar}
+\section{Vznik \LaTeX u}
+Jak bylo zmíněno v~odstavci výše, název \LaTeX~se skládá i ze jména Lamport.
+Jedná se o~původního autora systému, který vytvořil v~roce 1984 \LaTeX~a
+prvního manuálu k~němu z~roku 1986\cite{prvnimanual}. Ten následně předal
+údržbu i vývoj Frankovi Mittelbachovi, který v~rámci své společnosti
+pokračoval a vyvinul \LaTeX~2e (současná verze) a nyní pracuje na \LaTeX  
+3\cite{lamport}.
+
+\section{pdfTeX}
+\label{pdf}
+Důležitou brněnskou událostí pro \LaTeX byla publikace dizertační práce 
+na Masarykově univerzitě publikovaná studentem \selectlanguage{vietnamese}~Hàn Thế Thànhem\selectlanguage{czech}\cite{pdflatex} a vedoucím práce byl současný děkan Fakulty informatiky a bývalý rektor Masarykovy univerzity Jiří Zlatuška\cite{zlatuska}. Tato práce výrazně posunula práci s~\LaTeX em, a to tím způsobem, že nyní již není nutné generovat soubor s~příponou \verb|.dvi|, nýbrž přímo univerzální PDF dokument. Není snad nutno zmiňovat, že právě formát PDF je mnohem šířeji přijímaný než ostatní formáty dokumentů a dává tak možnost prosadit se nejen v~technické sféře.
+
+\section{Aktuální možnosti práce s~\LaTeX em}
+S~postupem času a přidáním širších funkcionalit (viz třeba \ref{pdf}) se výrazně rozšířily možnosti práce s~\LaTeX em. Například v~roce 2012 vznikla společnost Overleaf, která vytváří online editor pro editaci a kompilaci \LaTeX u v~rychlém a snadno použitelném prostředí\cite{overleaf}. Z~ostatních možností se dá zmínit například MixTeX\cite{miktex} a TeXmaker\cite{texmaker}.
+
+\section{Současný \LaTeX~a typografie}
+V~současné době typografie zůstává velkým a důležitým tématem a vzniká na
+toto téma mnoho časopisů. Například v~Česku se dá pořídit časopis
+Font\cite{casFont}. Co se týká dostupné literatury ke studiu pro práci
+s~\LaTeX em, tak nejsou novější možnosti příliš široké. Doporučit se dá přesto
+kniha z~roku 2003 od pana Rybičky\cite{rybicka}.
+
+Typografie nemusí být jen součástí knih, ale je i důležitým kritériem pro tvorbu uživatelských rozhraní. Například bakalářská práce Marka Vyroubala\cite{random} má v~klíčových slovech slovo typografie. Při zadání slova typography do systému Google Scholar se dá narazit na jistě velmi zajímavý článek za 25~\texteuro~od jistého Theo van Leeuwena\cite{dutch} nebo tento další článek o~semiotice\cite{semiotic}.
+\newpage
+\bibliography{bibliografie}
+\end{document}
+
