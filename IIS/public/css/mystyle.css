@@ -1,0 +1,118 @@
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f2f3f5;
+}
+* {
+    box-sizing: border-box;
+}
+
+/*** Nav end ***/
+nav {
+    background-color: #04AA6D;
+    /* background-color: #FFFFFF; */
+    /* background-color: #80ffff; */
+}
+
+/*** Nav end ***/
+#wrapper {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#wrapper input, #wrapper textarea {
+    max-width: 24rem;
+    min-width: 10rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+#wrapper label {
+    color: #04AA6D;
+    /* color: #046DAA; */
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+#btn_send {
+    background-color: black;
+    color: white;
+    font-weight: 700;
+    border-radius: 9999px;
+    align-items: center;
+    width: 14rem;
+}
+
+textarea {
+    border-color: #eee;
+    border-width: 1px;
+}
+label, textarea, input {
+    width: 100%;
+    display: block;
+}
+input {
+    border-style: solid;
+    border-width: 1px;
+}
+h1{
+    margin-left: 20px
+}
+#users {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #users td, #customers th {
+    border: 1px solid #ddd;
+    padding: 5px 10px 5px 5px;
+  }
+  
+  #users tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #users tr:hover {background-color: #ddd;}
+  
+  #users th {
+    padding: 5px 10px 5px 5px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+div {
+    padding: 10px 5px 10px 10px;
+}
+/*** Grid start ***/
+
+.grid-container {
+    width: 90%;
+    /* margin: 5rem auto auto auto; */
+    /* display: grid; */
+    /* grid-template-columns: auto auto auto auto; */
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    /* padding: 10px; */
+}
+
+.grid-item {
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid #808080;
+    border-radius: 1rem;
+    background-color: rgb(219, 234, 254,1);;
+    /* font-size: 30px; */
+    /* text-align: center; */
+}
+
+.grid-item p {
+    margin-top: 1rem;
+}
+
+/* .grid-item img {
+    width:  200px;
+    height: 200px;
+    object-fit: scale-down;
+    border-radius: 1rem;
+} */
+
+/*** Grid end ***/
