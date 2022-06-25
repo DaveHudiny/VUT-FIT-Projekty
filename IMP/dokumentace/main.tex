@@ -1,0 +1,50 @@
+\documentclass[10pt, a4paper, twocolumn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=1.8cm,top=1.8cm, text={18cm, 25cm}]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[unicode]{hyperref}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\usepackage[czech]{babel}
+\usepackage{color}
+\title{Dokumentace k semestrálnímu projektu\\IMP 2021/2022\\Téma è. 5 -- Stopky}
+\author{Jméno a pøíjmení: David Hudák\\Login: xhudak03}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+\section{Základní charakteristiky}
+Úkolem projektu bylo vytvoøit na libovolném kitu (zvolen FITkit) stopky. Stopky mají mìøit èas, být pozastavitelné a ukládat mezièasy. Mezièasy jsou ukládány formou zásobníku velikostnì omezeného \uv{zásobníku}. Uživatel mùže uložit až devìt mezièasù, pøièemž pøi ukládání 10. a dalších se odstraní nejstarší záznamy. Krom toho mùže uživatel vyèistit zásobník mezièasù a pøípadnì celé stopky nastartovat od nuly. Poèáteèní stav nabídky mezièasù je vynulován. Stopky ukládají a vypisují èasy ve formì hh:mm:ss.
+
+\section{Návod k obsluze}
+Stopky se Obsluha stopek je rozdìlena na jednotlivá tlaèítka FITkitu:
+\begin{itemize}
+    \item Tlaèítko \verb|B| (vypadá jako P) mùže spouštìt a zastavovat poèítání.
+    \item Tlaèítko \verb|C| (clear) vymaže celý obsah pamìti (souèasný èas i všechny èasy v zásobníku).
+    \item Tlaèítko \verb|*| uloží aktuální èas (pøi spuštìném i pozastaveném provozu) a uloží jej do zásobníku. V pøípadì pøeplnìní zásobníku je pøepsán nejstarší záznam.
+    \item Tlaèítko \verb|0| vymaže obsah zásobníku.
+    \item Tlaèítka 1-9 naètou do pamìti nejmladší až nejstarší záznam (tlaèítko 1 nejmladší, 2 druhý nejmladší a analogicky dále) mezièasu ze zásobníku. Tato funkce lze využít pouze pøi vypnutém èítání èasu. Pokud je naèten èas, dochází k vymazání aktuálního èasu, proto je vhodné nejprve aktuální èas uložit tlaèítkem \verb|*|.
+\end{itemize}
+
+\section{Postup implementace}
+Program byl vyplòován do demonstraèního projektu dr. Bidla \verb|keyb_lcd| dostupného ze složky k pøednáškám ve Wisu. Následnì do nìj byla doplnìna funkcionalita od dr. Strnadela z demonstraèních aplikací ve virtuálním poèítaèi pro implementaci hodin. Dále pak byly doplòovány funkce a funkcionality bez dalších zdrojù (vlastní implementace).
+
+Zásobník pro ukládání mezièasù byl implementován formou statického dvourozmìrného pole a na jeho \uv{vrchol} ukazuje èíselný \uv{ukazatel} pojmenován jako \verb|stack_pointer|. Ten je s pøidáním každého nového záznamu zvýšen o jednièku a modulován 9, pøièemž pokud se dostane na øádek pole, který už byl obsazen, obsah pøepíše. Obsah pro první a další je následnì odvozován odeètením vzdálenosti stisknutého znaku od jednièky (tlaèítko \verb|1| má vzdálenost 0, \verb|2| vzdálenost 1 atd.). Pokud zásobník po takovém odeètu pøeteèe (ukazatel na zásobník bude 3 a stisknuté tlaèítko \verb|9|), získává se odkaz do zásobníku odeètením vzniklého záporného èísla od 9.
+
+Režimy pro pozastaveno a poèítání jsou implementovány na základì dvoustavového automatu s hodnotami typu \verb|enum|. Stejnì tak jsou rozdìleny stavy pro zobrazování \verb|STACKED TIME| a pro standardní tisknutí výstupu.
+
+Veškerá autorská práce se nachází v \verb|./MCU/main.c| ve složce projektu.
+
+\section{Externí moduly}
+Pro projekty nejsou využity žádné moduly kromì základního FITkitu.
+
+\section{Ukázka fungování}
+Ukázka se nachází na odkazu: \href{https://drive.google.com/file/d/1aJO9EC0gheOK3URBtveAAHdAOgh-fwvZ/view?usp=sharing}{Ukázka} (v pøípadì nefunkèností odkazu prosím o zprávu).
+
+\section{Závìr}
+Projekt by mìl být zcela funkèní a v dobì psaní této zprávy nejsou známy žádné vìdomé nedostatky. Projekt byl vyvíjen a testován ve školním virtuálním stroji.
+
+\end{document}
