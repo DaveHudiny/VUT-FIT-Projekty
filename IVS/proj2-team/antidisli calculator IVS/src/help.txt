@@ -1,0 +1,24 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Antidisli foundation
+
+Hello, you need help, don't you?
+You should start with creating 'build' folder in /src!
+Then you should use your cmake-gui (if you haven't installed it yet, visit website cmake.com and install the newest version!
+When you are using cmake-gui, there will be an error message. But don't worry!"
+We also prepared redme.md for you, where you can see more helpful info for installing your developer version of project!
+You have to open your Microsoft Visual Studio Community version (at least 2017 version), open .sln in build folder and continously build all projects.
+
+If you want to generate installer of our calculation, you need to have Inno Setup app. Then there is calculatorInstallatorScript.iss, which generates
+your installer in Installer folder.
+
+If you want to start profile.exe, you'll have to write make profile < "input.txt".
+
+If you want to use make pack, you need to create Doc and Install folder beside your repository folder and fill it with files you want. Then you have
+to agree with anything what command make pack wants and press D (directory).
+
+If you don't know, what to do next, visit jira.com and login with your account - you'll see more amazing tasks for you!
+I hope you enjoyed taking part in our wonderful team!
+With pleasure, David Hudak, author of this demotivating status.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------

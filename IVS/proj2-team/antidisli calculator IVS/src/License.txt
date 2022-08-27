@@ -1,0 +1,1 @@
+This software has been developed by authors Martin Kmenta, Stefan Mracna, David Hudak and Samuel Popelar and is distributed under the GNU GPL license. This means that users can modify and share the software as long as the modified software is distributed under the same license. Any attempts to profit off this software is strictly prohibited

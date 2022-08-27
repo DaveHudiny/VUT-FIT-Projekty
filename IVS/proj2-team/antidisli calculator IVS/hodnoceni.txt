@@ -1,0 +1,4 @@
+xkment06 100 (vedoucí, nastaveni repozitare, sepsani jira ticketu, cmake, profiling, instalator, dokumentace instalace)
+xmracn00 100 (testy a testování, dokumentace)
+xpopel22 100 (GUI)
+xhudak03 100 (mat. knihovna, rozhraní controller)

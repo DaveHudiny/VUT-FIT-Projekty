@@ -1,0 +1,1 @@
+This project was created by the team of David Hudák, Samuel Popeláø, Štefan Mraèna and our team leader Martin Kmenta.

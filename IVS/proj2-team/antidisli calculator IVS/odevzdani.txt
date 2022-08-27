@@ -1,0 +1,5 @@
+Datum: 29. 4. 2020
+Čas: 22:45
+Archiv odevzdán na server ivs.fit.vutbr.cz
+Archiv obsahuje složky s instalačním souborem, dokumentací a kompletním repozitářem.
+Přístup do repozitáře je možný i přes avizovaný ivs.kontrola@gmail.com
